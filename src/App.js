@@ -1,66 +1,65 @@
 import React, { Component } from 'react'
 import { DICTIONARY } from './constants'
+import Navigation from './components/Navigation'
+import Quiz from './components/Quiz'
 import './App.css'
 
 class App extends Component {
   state = {
-    library: 'hiragana',
+    activePage: 'hiragana',
     question: '',
     answerKey: '',
-    isAnswer: null,
   }
 
   componentDidMount() {
     this.getRandomKana()
   }
 
-  getRandomKana = libraryId => {
-    const library = DICTIONARY[this.state.library]
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state.answerKey === nextState.answerKey) {
+      this.getRandomKana()
+    }
+    return true
+  }
+
+  handleNavSelect = pageId => {
+    this.setState(
+      {
+        activePage: pageId,
+      },
+      this.getRandomKana,
+    )
+  }
+
+  getRandomKana = () => {
+    const library = DICTIONARY[this.state.activePage]
+
+    if (!library) {
+      return
+    }
+
     const kana = library[Math.floor(Math.random() * library.length)]
     this.setState({
       question: kana[1],
       answerKey: kana[0],
-      isAnswer: null,
     })
-  }
-
-  selectLibrary = libraryId => {
-    this.setState({
-      library: libraryId,
-    })
-  }
-
-  onSubmit = evt => {
-    evt.preventDefault()
-    const answerInput = document.getElementById('answerInput').value
-    if (answerInput === this.state.answerKey) {
-      this.setState({
-        isAnswer: true,
-      })
-    }
   }
 
   render() {
     return (
       <div className="App">
-        <header>Kana Practice</header>
-        <div class="main">
-          <div>{this.state.question}</div>
-          {this.state.isAnswer ? (
-            <div>
-              <div>That's right!</div>
-              <button onClick={() => this.getRandomKana()}>Next</button>
-            </div>
+        <header>Let's Learn Kana Together!</header>
+        <div className="main">
+          <Navigation handleClick={this.handleNavSelect} />
+          {this.state.activePage === 'hiragana' ||
+          this.state.activePage === 'katakana' ? (
+            <Quiz
+              question={this.state.question}
+              answerKey={this.state.answerKey}
+              getNextQuestion={this.getRandomKana}
+            />
           ) : (
-            <div>
-              <form>
-                {!this.state.isAnswer && <div>Nope!</div>}
-                <input id="answerInput" name="answerInput" type="text" />
-                <button onClick={this.onSubmit} type="submit">
-                  Check your answer
-                </button>
-              </form>
-            </div>
+            <div>Let's Learn Kana Together was built by Jennie</div>
           )}
         </div>
       </div>
