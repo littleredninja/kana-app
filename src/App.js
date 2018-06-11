@@ -1,10 +1,17 @@
+// @flow
 import React, { Component } from 'react'
 import { DICTIONARY } from './constants'
 import Navigation from './components/Navigation'
 import Quiz from './components/Quiz'
 import './App.css'
 
-class App extends Component {
+type StateT = {
+  activePage: string,
+  question: string,
+  answerKey: string,
+}
+
+class App extends Component<{}, StateT> {
   state = {
     activePage: 'hiragana',
     question: '',
@@ -15,14 +22,14 @@ class App extends Component {
     this.getRandomKana()
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps: {}, nextState: StateT) {
     if (this.state.answerKey === nextState.answerKey) {
       this.getRandomKana()
     }
     return true
   }
 
-  handleNavSelect = pageId => {
+  handleNavSelect = (pageId: string) => {
     this.setState(
       {
         activePage: pageId,
@@ -38,10 +45,10 @@ class App extends Component {
       return
     }
 
-    const kana = library[Math.floor(Math.random() * library.length)]
+    const quiz = library[Math.floor(Math.random() * library.length)]
     this.setState({
-      question: kana[1],
-      answerKey: kana[0],
+      question: quiz.kana,
+      answerKey: quiz.romanji,
     })
   }
 

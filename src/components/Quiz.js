@@ -1,10 +1,20 @@
+// @flow
 import React from 'react'
 import './Quiz.css'
 
-class Quiz extends React.Component {
+type StateT = {
+  isCorrectAnswer: boolean,
+  hasSubmittedAnswer: boolean,
+}
+
+type PropsT = {
+  getNextQuestion: () => {},
+  answerKey: string,
+  question: string,
+}
+class Quiz extends React.Component<PropsT, StateT> {
   state = {
     isCorrectAnswer: false,
-    hasInput: false,
     hasSubmittedAnswer: false,
   }
 
@@ -18,22 +28,9 @@ class Quiz extends React.Component {
       {
         isCorrectAnswer: false,
         hasSubmittedAnswer: false,
-        hasInput: false,
       },
       this.props.getNextQuestion(),
     )
-  }
-
-  onInput = () => {
-    if (!document.getElementById('answerInput').value) {
-      this.setState({
-        hasInput: false,
-      })
-    } else {
-      this.setState({
-        hasInput: true,
-      })
-    }
   }
 
   onSubmitAnswer = () => {
