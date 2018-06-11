@@ -1,0 +1,45 @@
+.Quiz-question {
+  font-size: 50px;
+  text-align: center;
+}
+
+.Quiz-answerGrade {
+  font-size: 30px;
+  text-align: center;
+}
+
+.Quiz-answerInput {
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  box-shadow: 0px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  display: block;
+  height: 50px;
+  margin: 10px auto;
+  padding: 15px;
+  font-family: inherit;
+  font-size: 1.3em;
+  width: 40%;
+}
+
+.Quiz-primaryButton {
+  border-radius: 5px;
+  display: block;
+  font-family: inherit;
+  font-size: 25px;
+  height: 40px;
+  margin: 10px auto;
+  width: 40%;
+}
+
+.Quiz-secondaryButton {
+  border: none;
+  display: block;
+  font-family: inherit;
+  font-size: 20px;
+  margin: 10px auto;
+  text-decoration: underline;
+  width: 40%;
+}

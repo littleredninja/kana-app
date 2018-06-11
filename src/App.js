@@ -48,8 +48,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header>Let's Learn Kana Together!</header>
-        <div className="main">
+        <header className="App-header">Let's Learn Kana Together!</header>
+        <div className="App-main">
           <Navigation handleClick={this.handleNavSelect} />
           {this.state.activePage === 'hiragana' ||
           this.state.activePage === 'katakana' ? (

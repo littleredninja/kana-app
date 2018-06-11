@@ -1,4 +1,5 @@
 import React from 'react'
+import './Quiz.css'
 
 class Quiz extends React.Component {
   state = {
@@ -7,9 +8,7 @@ class Quiz extends React.Component {
     hasSubmittedAnswer: false,
   }
 
-  skipQuestion = evt => {
-    console.log('the skip questionn', evt)
-    evt.preventDefault()
+  skipQuestion = () => {
     document.getElementById('answerForm').reset()
     this.getNextQuestion()
   }
@@ -58,8 +57,10 @@ class Quiz extends React.Component {
   renderCorrectGuess = () => {
     return (
       <div>
-        <div>Yes!</div>
-        <button onClick={this.getNextQuestion}>Next</button>
+        <div className="Quiz-answerGrade">Yes!</div>
+        <button className="Quiz-primaryButton" onClick={this.getNextQuestion}>
+          Next
+        </button>
       </div>
     )
   }
@@ -69,22 +70,30 @@ class Quiz extends React.Component {
       <div>
         <form id="answerForm" onSubmit={evt => evt.preventDefault()}>
           {!this.state.isCorrectAnswer &&
-            this.state.hasSubmittedAnswer && <div>Nope!</div>}
+            this.state.hasSubmittedAnswer && (
+              <div className="Quiz-answerGrade">Nope!</div>
+            )}
           <input
             id="answerInput"
             name="answerInput"
-            onInput={evt => this.onInput(evt)}
+            className="Quiz-answerInput"
             type="text"
             autoComplete="nope"
           />
-          <button onClick={this.onSubmitAnswer} type="button">
+          <button
+            className="Quiz-primaryButton"
+            onClick={this.onSubmitAnswer}
+            type="button"
+          >
             Try
           </button>
-          {!this.state.hasInput && (
-            <button onClick={this.skipQuestion} type="button">
-              Next
-            </button>
-          )}
+          <button
+            className="Quiz-secondaryButton"
+            onClick={this.skipQuestion}
+            type="button"
+          >
+            Next
+          </button>
         </form>
       </div>
     )
@@ -93,7 +102,7 @@ class Quiz extends React.Component {
   render() {
     return (
       <div>
-        <div>{this.props.question}</div>
+        <div className="Quiz-question">{this.props.question}</div>
         {this.state.isCorrectAnswer
           ? this.renderCorrectGuess()
           : this.renderTry()}

@@ -1,0 +1,16 @@
+.Navigation {
+  /* border: 1px solid green; */
+}
+
+.Navigation > ul {
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+}
+
+.Navigation-link {
+  flex: 1 1 100px;
+  font-size: 30px;
+  list-style-type: none;
+  text-align: center;
+}

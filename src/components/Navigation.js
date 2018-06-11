@@ -1,4 +1,5 @@
 import React from 'react'
+import './Navigation.css'
 
 class Navigation extends React.Component {
   state = {
@@ -11,11 +12,23 @@ class Navigation extends React.Component {
 
   render() {
     return (
-      <nav className="navigation">
+      <nav className="Navigation">
         <ul>
-          <li onClick={() => this.onClick('hiragana')}>Hiragana</li>
-          <li onClick={() => this.onClick('katakana')}>Katakana</li>
-          <li onClick={() => this.onClick('about')}>About</li>
+          <li
+            className="Navigation-link"
+            onClick={() => this.onclick('hiragana')}
+          >
+            Hiragana
+          </li>
+          <li
+            className="Navigation-link"
+            onClick={() => this.onClick('katakana')}
+          >
+            Katakana
+          </li>
+          <li className="Navigation-link" onClick={() => this.onClick('about')}>
+            About
+          </li>
         </ul>
       </nav>
     )
